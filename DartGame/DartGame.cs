@@ -41,6 +41,7 @@ namespace DartGame
             ReviewRadioButton.Checked = true;
             PlayRadioButton.Checked = false;
             DisplayComboBox.Enabled = false;
+            PlayRadioButton.Focus();
             DrawBoard();
         }
         void DrawBoard() 
@@ -83,11 +84,16 @@ namespace DartGame
         {
             DisplayComboBox.Enabled = false;
             
-            DartCount = DartCount + 1;
-            if (DartCount == 4)
+            DartCount++;
+            if (DartCount == 3)
             {
                 Displaylabel.Text = "Press Space to Start again";
-                DartCount = DartCount + 1;
+                DartCount++;
+
+                int x = Dart.Next(1, 100);
+                int y = Dart.Next(1, 100);
+
+                DrawDart(x, y);
             }
             else if (DartCount > 4) 
             {
@@ -103,11 +109,14 @@ namespace DartGame
 
                 DrawDart(x,y);
             }
+
         }
 
         void Review() 
         {
+            DartCount = 0;
             DisplayComboBox.Enabled = true;
+            DrawBoard();
         }
 
         //Event Handlers----------------------------------------------------------------------------------------------------------------------------
@@ -125,11 +134,11 @@ namespace DartGame
         {
             if (ReviewRadioButton.Checked == true) 
             {
-                SetDefaults();
                 Review();
             }
             else 
-            { 
+            {
+                Displaylabel.Text = "Press Space to Launch Darts";
                 DrawBoard();
             }
         }

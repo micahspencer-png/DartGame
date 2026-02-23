@@ -69,12 +69,11 @@
             // 
             this.groupBox1.Controls.Add(this.PlayRadioButton);
             this.groupBox1.Controls.Add(this.ReviewRadioButton);
-            this.groupBox1.Location = new System.Drawing.Point(629, 193);
+            this.groupBox1.Location = new System.Drawing.Point(607, 214);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 145);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             // 
             // PlayRadioButton
             // 
@@ -105,9 +104,9 @@
             this.Displaylabel.AutoSize = true;
             this.Displaylabel.Location = new System.Drawing.Point(604, 97);
             this.Displaylabel.Name = "Displaylabel";
-            this.Displaylabel.Size = new System.Drawing.Size(186, 16);
+            this.Displaylabel.Size = new System.Drawing.Size(119, 16);
             this.Displaylabel.TabIndex = 4;
-            this.Displaylabel.Text = "Press Space To Launch Darts";
+            this.Displaylabel.Text = "Select Play to Start";
             // 
             // DartGame
             // 
