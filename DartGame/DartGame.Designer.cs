@@ -30,7 +30,7 @@
         {
             this.DisplayPictureBox = new System.Windows.Forms.PictureBox();
             this.ExitButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.DisplayComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.PlayRadioButton = new System.Windows.Forms.RadioButton();
             this.ReviewRadioButton = new System.Windows.Forms.RadioButton();
@@ -57,13 +57,13 @@
             this.ExitButton.UseVisualStyleBackColor = true;
             this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
-            // comboBox1
+            // DisplayComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(629, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(174, 24);
-            this.comboBox1.TabIndex = 2;
+            this.DisplayComboBox.FormattingEnabled = true;
+            this.DisplayComboBox.Location = new System.Drawing.Point(629, 12);
+            this.DisplayComboBox.Name = "DisplayComboBox";
+            this.DisplayComboBox.Size = new System.Drawing.Size(174, 24);
+            this.DisplayComboBox.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -116,7 +116,7 @@
             this.ClientSize = new System.Drawing.Size(823, 574);
             this.Controls.Add(this.Displaylabel);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.DisplayComboBox);
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.DisplayPictureBox);
             this.MaximizeBox = false;
@@ -137,7 +137,7 @@
 
         private System.Windows.Forms.PictureBox DisplayPictureBox;
         private System.Windows.Forms.Button ExitButton;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox DisplayComboBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton PlayRadioButton;
         private System.Windows.Forms.RadioButton ReviewRadioButton;
