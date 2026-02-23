@@ -74,6 +74,7 @@
             this.DisplayComboBox.Name = "DisplayComboBox";
             this.DisplayComboBox.Size = new System.Drawing.Size(174, 24);
             this.DisplayComboBox.TabIndex = 2;
+            this.DisplayComboBox.SelectedIndexChanged += new System.EventHandler(this.DisplayComboBox_SelectedIndexChanged);
             // 
             // groupBox1
             // 

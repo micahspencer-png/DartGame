@@ -127,8 +127,7 @@ namespace DartGame
             Displaylabel.Text = "";
             DartCount = 0;
             DisplayComboBox.Enabled = true;
-            DrawBoard();
-            ReadFileIntoArray(DataFile);
+            FillComboBox();
         }
         static void ReadFromFile(string path)
         {
@@ -188,33 +187,39 @@ namespace DartGame
         {
             int count = 0;
             RecordCount(path, ref count);
-            string[,] DartData = new string[6,count];
+            string[,] DartData = new string[count,7];
             string[] temp;
             int RoundNumber = 0;
 
             using (StreamReader currentFile = new StreamReader(path))
             {
-                try
-                {
+                
                     while (!currentFile.EndOfStream)
                     {
                         temp = currentFile.ReadLine().Split();
-                        DartData[0, RoundNumber] = temp[0];
-                        DartData[1, RoundNumber] = temp[1];
-                        DartData[2, RoundNumber] = temp[2];
-                        DartData[3, RoundNumber] = temp[3];
-                        DartData[4, RoundNumber] = temp[4];
-                        DartData[5, RoundNumber] = temp[5];
-                        DartData[6, RoundNumber] = temp[6];
+                        DartData[RoundNumber,0] = temp[0];
+                        DartData[RoundNumber,1] = temp[1];
+                        DartData[RoundNumber,2] = temp[2];
+                        DartData[RoundNumber,3] = temp[3];
+                        DartData[RoundNumber,4] = temp[4];
+                        DartData[RoundNumber,5] = temp[5];
+                        DartData[RoundNumber,6] = temp[6];
                         RoundNumber++;
                     }
-                }
-                catch 
-                { 
-                }
+                
             }
-            DartData = DartArray;
+            DartArray = DartData;
             return DartData;
+        }
+
+        private void FillComboBox() 
+        { 
+            DisplayComboBox.Items.Clear();
+            ReadFileIntoArray(DataFile);
+                for (int i = 1; i<DartArray.GetLength(0);i++) 
+                {
+                    DisplayComboBox.Items.Add(DartArray[i,0]);
+                }
         }
         //Event Handlers----------------------------------------------------------------------------------------------------------------------------
         private void DartGame_Load(object sender, EventArgs e)
@@ -247,6 +252,26 @@ namespace DartGame
             {
                 Play();
             }
+        }
+
+        private void DisplayComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int CBIndex = (int)DisplayComboBox.SelectedIndex + 1;
+            int x1 = int.Parse(DartArray[CBIndex, 1]);
+            int y1 = int.Parse(DartArray[CBIndex, 2]);
+            int x2 = int.Parse(DartArray[CBIndex, 3]);
+            int y2 = int.Parse(DartArray[CBIndex, 4]);
+            int x3 = int.Parse(DartArray[CBIndex, 5]);
+            int y3 = int.Parse(DartArray[CBIndex, 6]);
+
+            RoundTextBox.Text = DartArray[CBIndex,0].ToString();
+            Dart1TextBox.Text = $"{DartArray[CBIndex, 1].ToString()}, {DartArray[CBIndex, 2].ToString()}";
+            Dart2TextBox.Text = $"{DartArray[CBIndex, 3].ToString()}, {DartArray[CBIndex, 4].ToString()}";
+            Dart3TextBox.Text = $"{DartArray[CBIndex, 5].ToString()}, {DartArray[CBIndex, 6].ToString()}";
+            DrawBoard();
+            DrawDart(x1,y1);
+            DrawDart(x2,y2);
+            DrawDart(x3,y3);
         }
     }
 }
