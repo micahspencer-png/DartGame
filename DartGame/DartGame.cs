@@ -23,8 +23,8 @@ namespace DartGame
         string DataFile = "..\\..\\..\\Dart.Txt";
         string DartData = "";
         string[,] DartArray;
-        Random DartX = new Random();
-        Random DartY = new Random();
+        Random Dart = new Random();
+        
 
         public DartGame()
         {
@@ -46,16 +46,23 @@ namespace DartGame
             Graphics g = DisplayPictureBox.CreateGraphics();
             Pen thePen = new Pen(Color.Black);
             System.Drawing.Image image = System.Drawing.Image.FromFile("..\\..\\..\\DartBoard.jpg");
+            float dx = DisplayPictureBox.Width / 500;
+            float dy = DisplayPictureBox.Height / 500;
+            float sx = DisplayPictureBox.Width /  330f;
+            float sy = DisplayPictureBox.Height / 330f;
+            g.Clear(Color.White);
+            g.TranslateTransform(dx, dy);
+            g.ScaleTransform(sx, sy);
 
             g.DrawImage(image, 0, 0); 
-
             g.Dispose();
             thePen.Dispose();
+            
         }
         void DrawDart(int x, int y)
         {
             Graphics g = DisplayPictureBox.CreateGraphics();
-            Pen thePen = new Pen(Color.Blue, 1);
+            Pen thePen = new Pen(Color.Red, 1);
             int size = 25;
 
             g.DrawEllipse(thePen, x - size / 2, y - size / 2, size, size);
@@ -67,16 +74,22 @@ namespace DartGame
 
         void Play() 
         {
+            if (DartCount > 4) 
+            {
+                DartCount = 0;
+                Displaylabel.Text = "Press Space to Launch Darts";
+                DrawBoard();
+            }
             DartCount = DartCount + 1;
             if (DartCount == 4)
             {
                 Displaylabel.Text = "Press Space to Start again";
-                DartCount = 0;
+                DartCount = DartCount + 1;
             }
             else
             {
-                int x = DartX.Next(1,579);
-                int y = DartY.Next(1,579);
+                int x = Dart.Next(1,500);
+                int y = Dart.Next(1,500);
 
                 DrawDart(x,y);
             }

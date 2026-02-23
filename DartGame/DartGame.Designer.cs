@@ -105,9 +105,9 @@
             this.Displaylabel.AutoSize = true;
             this.Displaylabel.Location = new System.Drawing.Point(604, 97);
             this.Displaylabel.Name = "Displaylabel";
-            this.Displaylabel.Size = new System.Drawing.Size(207, 16);
+            this.Displaylabel.Size = new System.Drawing.Size(186, 16);
             this.Displaylabel.TabIndex = 4;
-            this.Displaylabel.Text = "Press SpaceBar To Launch Darts";
+            this.Displaylabel.Text = "Press Space To Launch Darts";
             // 
             // DartGame
             // 
