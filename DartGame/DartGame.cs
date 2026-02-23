@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace DartGame
 {
@@ -22,17 +23,22 @@ namespace DartGame
     {
         int DartCount = 0;
         string DataFile = "..\\..\\..\\DartLocations.Txt";
-        string DartLocation = "Round 1";
+        int roundCount = 1;
+        string DartLocation = "";
         string[,] DartArray;
         Random Dart = new Random();
-        int RoundCount = 1;
+        
         
 
         public DartGame()
         {
+            int DartRound = 1;
             InitializeComponent();
             SetDefaults();
             ReadFromFile(DataFile);
+            ReadFileCount(DataFile,ref DartRound);
+            roundCount = DartRound;
+            DartLocation = $"Round {DartRound}";
         }
         //Program Logic--------------------------------------------------------------------------------------------------------------------------
 
@@ -90,8 +96,8 @@ namespace DartGame
                 Displaylabel.Text = "Press Space to Start again";
                 DartCount++;
 
-                int x = Dart.Next(1, 100);
-                int y = Dart.Next(1, 100);
+                int x = Dart.Next(1, 330);
+                int y = Dart.Next(1, 330);
                 DartLocation += $"$${x}$${y}";
                 DrawDart(x, y);
             }
@@ -101,13 +107,13 @@ namespace DartGame
                 Displaylabel.Text = "Press Space to Launch Darts";
                 DrawBoard();
                 AppendToFile(DataFile,DartLocation);
-                RoundCount++;
-                DartLocation = $"Round {RoundCount}";
+                roundCount++;
+                DartLocation = $"Round {roundCount}";
             }
             else
             {
-                int x = Dart.Next(1,100);
-                int y = Dart.Next(1,100);
+                int x = Dart.Next(1, 330);
+                int y = Dart.Next(1, 330);
                 DartLocation += $"$${x}$${y}";
                 DrawDart(x,y);
             }
@@ -129,6 +135,7 @@ namespace DartGame
                 using (StreamReader currentFile = new StreamReader(path))
                 {
                     currentFile.ReadLine();
+
                 }
             }
             catch 
@@ -138,6 +145,20 @@ namespace DartGame
                     currentFile.WriteLine("Countx$$x1$$y1$$x2$$y2$$x3$$y3");
                 }
             }
+        }
+        static int ReadFileCount(string path,ref int count)
+        {
+            
+            using (StreamReader currentFile = new StreamReader(path))
+            {
+                while (!currentFile.EndOfStream)
+                {
+                    currentFile.ReadLine();
+                    count++;
+                }
+            }
+            count--;
+            return count;
         }
         static void AppendToFile(string path, string DartLocation)
         {
@@ -158,33 +179,32 @@ namespace DartGame
                 }
             }
             count--;
-            RoundCount = count;
             return count;
         }
 
-        //private static string[,] ReadFileIntoArray(string path)
-        //{
-        //    string[,] DartData = new string[6, RecordCount(path)];
-        //    string[] temp;
-        //    int RoundNumber = 0;
+        private static string[,] ReadFileIntoArray(string path)
+        {
+            string[,] DartData = new string[6, RecordCount(path)];
+            string[] temp;
+            int RoundNumber = 0;
 
-        //    using (StreamReader currentFile = new StreamReader(path))
-        //    {
-        //        while (!currentFile.EndOfStream)
-        //        {
-        //            temp = currentFile.ReadLine().Split("$$");
-        //            DartData[0, RoundNumber] = temp[0];
-        //            DartData[1, RoundNumber] = temp[1];
-        //            DartData[2, RoundNumber] = temp[2];
-        //            DartData[3, RoundNumber] = temp[3];
-        //            DartData[4, RoundNumber] = temp[4];
-        //            DartData[5, RoundNumber] = temp[5];
-        //            DartData[6, RoundNumber] = temp[6];
-        //            RoundNumber++;
-        //        }
-        //    }
-        //    return DartData;
-        //}
+            using (StreamReader currentFile = new StreamReader(path))
+            {
+                while (!currentFile.EndOfStream)
+                {
+                    temp = currentFile.ReadLine().Split("$$");
+                    DartData[0, RoundNumber] = temp[0];
+                    DartData[1, RoundNumber] = temp[1];
+                    DartData[2, RoundNumber] = temp[2];
+                    DartData[3, RoundNumber] = temp[3];
+                    DartData[4, RoundNumber] = temp[4];
+                    DartData[5, RoundNumber] = temp[5];
+                    DartData[6, RoundNumber] = temp[6];
+                    RoundNumber++;
+                }
+            }
+            return DartData;
+        }
         //Event Handlers----------------------------------------------------------------------------------------------------------------------------
         private void DartGame_Load(object sender, EventArgs e)
         {
