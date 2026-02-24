@@ -80,8 +80,8 @@ namespace DartGame
             g.TranslateTransform(dx, dy);
             g.ScaleTransform(sx, sy);
             g.DrawEllipse(thePen, x - size / 2, y - size / 2, size, size);
-            g.DrawLine(thePen, x - 3, y, x + 3, y);
-            g.DrawLine(thePen, x, y - 3, x, y + 3);
+            g.DrawLine(thePen, x - 5, y, x + 5, y);
+            g.DrawLine(thePen, x, y - 5, x, y + 5);
             g.Dispose();
             thePen.Dispose();
         }
@@ -90,7 +90,7 @@ namespace DartGame
         {
             Graphics g = DisplayPictureBox.CreateGraphics();
             Font drawFont = new Font("Times New Roman", 12);
-            SolidBrush drawBrush = new SolidBrush(Color.Blue);
+            SolidBrush drawBrush = new SolidBrush(Color.Black);
             float dx = DisplayPictureBox.Width / 500;
             float dy = DisplayPictureBox.Height / 500;
             float sx = DisplayPictureBox.Width / 330f;
