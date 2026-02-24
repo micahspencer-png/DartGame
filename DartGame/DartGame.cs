@@ -86,6 +86,25 @@ namespace DartGame
             thePen.Dispose();
         }
 
+        void DrawNumber(int x, int y,string s) 
+        {
+            Graphics g = DisplayPictureBox.CreateGraphics();
+            Font drawFont = new Font("Times New Roman", 12);
+            SolidBrush drawBrush = new SolidBrush(Color.Blue);
+            float dx = DisplayPictureBox.Width / 500;
+            float dy = DisplayPictureBox.Height / 500;
+            float sx = DisplayPictureBox.Width / 330f;
+            float sy = DisplayPictureBox.Height / 330f;
+            g.TranslateTransform(dx, dy);
+            g.ScaleTransform(sx,sy);
+            Point Num = new Point();
+            Num .X = x-3;
+            Num .Y = y-3;
+            g.DrawString(s,drawFont,drawBrush,Num);
+            g.Dispose();
+            drawBrush.Dispose();
+        }
+
         void Play() 
         {
             
@@ -221,6 +240,29 @@ namespace DartGame
                     DisplayComboBox.Items.Add(DartArray[i,0]);
                 }
         }
+
+        private void ComboBoxChange() 
+        { 
+            int CBIndex = (int)DisplayComboBox.SelectedIndex + 1;
+            int x1 = int.Parse(DartArray[CBIndex, 1]);
+            int y1 = int.Parse(DartArray[CBIndex, 2]);
+            int x2 = int.Parse(DartArray[CBIndex, 3]);
+            int y2 = int.Parse(DartArray[CBIndex, 4]);
+            int x3 = int.Parse(DartArray[CBIndex, 5]);
+            int y3 = int.Parse(DartArray[CBIndex, 6]);
+
+            RoundTextBox.Text = DartArray[CBIndex,0].ToString();
+            Dart1TextBox.Text = $"{DartArray[CBIndex, 1].ToString()}, {DartArray[CBIndex, 2].ToString()}";
+            Dart2TextBox.Text = $"{DartArray[CBIndex, 3].ToString()}, {DartArray[CBIndex, 4].ToString()}";
+            Dart3TextBox.Text = $"{DartArray[CBIndex, 5].ToString()}, {DartArray[CBIndex, 6].ToString()}";
+            DrawBoard();
+            DrawDart(x1,y1);
+            DrawNumber(x1,y1,"1");
+            DrawDart(x2,y2);
+            DrawNumber(x2,y2,"2");
+            DrawDart(x3,y3);
+            DrawNumber(x3,y3,"3");
+        }
         //Event Handlers----------------------------------------------------------------------------------------------------------------------------
         private void DartGame_Load(object sender, EventArgs e)
         {
@@ -256,22 +298,7 @@ namespace DartGame
 
         private void DisplayComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int CBIndex = (int)DisplayComboBox.SelectedIndex + 1;
-            int x1 = int.Parse(DartArray[CBIndex, 1]);
-            int y1 = int.Parse(DartArray[CBIndex, 2]);
-            int x2 = int.Parse(DartArray[CBIndex, 3]);
-            int y2 = int.Parse(DartArray[CBIndex, 4]);
-            int x3 = int.Parse(DartArray[CBIndex, 5]);
-            int y3 = int.Parse(DartArray[CBIndex, 6]);
-
-            RoundTextBox.Text = DartArray[CBIndex,0].ToString();
-            Dart1TextBox.Text = $"{DartArray[CBIndex, 1].ToString()}, {DartArray[CBIndex, 2].ToString()}";
-            Dart2TextBox.Text = $"{DartArray[CBIndex, 3].ToString()}, {DartArray[CBIndex, 4].ToString()}";
-            Dart3TextBox.Text = $"{DartArray[CBIndex, 5].ToString()}, {DartArray[CBIndex, 6].ToString()}";
-            DrawBoard();
-            DrawDart(x1,y1);
-            DrawDart(x2,y2);
-            DrawDart(x3,y3);
+            ComboBoxChange();
         }
     }
 }
