@@ -54,11 +54,11 @@ namespace DartGame
         {
             Graphics g = DisplayPictureBox.CreateGraphics();
             Pen thePen = new Pen(Color.Black);
-            System.Drawing.Image image = System.Drawing.Image.FromFile("..\\..\\..\\DartBoard.jpg");
+            System.Drawing.Image image = System.Drawing.Image.FromFile("..\\..\\..\\Transparent_DartBoard.jpg");
             float dx = DisplayPictureBox.Width / 500;
             float dy = DisplayPictureBox.Height / 500;
-            float sx = DisplayPictureBox.Width /  330f;
-            float sy = DisplayPictureBox.Height / 330f;
+            float sx = DisplayPictureBox.Width /  700f;
+            float sy = DisplayPictureBox.Height / 700f;
             g.Clear(Color.White);
             g.TranslateTransform(dx, dy);
             g.ScaleTransform(sx, sy);
@@ -71,7 +71,7 @@ namespace DartGame
         void DrawDart(int x, int y)
         {
             Graphics g = DisplayPictureBox.CreateGraphics();
-            Pen thePen = new Pen(Color.Red, 1);
+            Pen thePen = new Pen(Color.Red, 2);
             int size = 25;
             float dx = DisplayPictureBox.Width / 500;
             float dy = DisplayPictureBox.Height / 500;
@@ -98,8 +98,8 @@ namespace DartGame
             g.TranslateTransform(dx, dy);
             g.ScaleTransform(sx,sy);
             Point Num = new Point();
-            Num .X = x-3;
-            Num .Y = y-3;
+            Num .X = x-1;
+            Num .Y = y-1;
             g.DrawString(s,drawFont,drawBrush,Num);
             g.Dispose();
             drawBrush.Dispose();
