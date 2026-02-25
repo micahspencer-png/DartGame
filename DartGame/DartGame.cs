@@ -22,7 +22,7 @@ namespace DartGame
     public partial class DartGame : Form
     {
         int DartCount = 0;
-        string DataFile = "..\\..\\..\\DartLocations.Txt";
+        string DataFile = "..\\..\\..\\DartLocationLog.Txt";
         int roundCount = 1;
         string DartLocation = "";
         string[,] DartArray;
@@ -37,7 +37,7 @@ namespace DartGame
             ReadFromFile(DataFile);
             ReadFileCount(DataFile,ref DartRound);
             roundCount = DartRound;
-            DartLocation = $"Round{DartRound}";
+            DartLocation = $"Round {DartRound}";
             SetDefaults();
         }
         //Program Logic--------------------------------------------------------------------------------------------------------------------------
@@ -47,6 +47,9 @@ namespace DartGame
             ReviewRadioButton.Checked = true;
             PlayRadioButton.Checked = false;
             DisplayComboBox.Enabled = true;
+            PlayButton.Enabled = false;
+            SaveButton.Enabled = false;
+            RoundGroupBox.Hide();
             PlayRadioButton.Focus();
         }
         void DrawBoard() 
@@ -106,9 +109,10 @@ namespace DartGame
 
         void Play() 
         {
+            SaveButton.Enabled = false;
+            PlayButton.Enabled = true;
             RoundGroupBox.Show();   
             DisplayComboBox.Hide();
-            
             DartCount++;
             if (DartCount == 3)
             {
@@ -118,6 +122,9 @@ namespace DartGame
                 int y = Dart.Next(1, 330);
                 DartLocation += $" | {x} | {y}";
                 DrawDart(x, y);
+                PlayButton.Enabled = false;
+                SaveButton.Enabled = true;
+                SaveButton.Focus();
             }
             else if (DartCount == 4) 
             {
@@ -126,7 +133,10 @@ namespace DartGame
                 DrawBoard();
                 AppendToFile(DataFile,DartLocation);
                 roundCount++;
-                DartLocation = $"Round{roundCount}";
+                DartLocation = $"Round {roundCount}";
+                PlayButton.Enabled = true;
+                SaveButton.Enabled = false;
+                PlayButton.Focus();
             }
             else
             {
@@ -134,6 +144,9 @@ namespace DartGame
                 int y = Dart.Next(1, 330);
                 DartLocation += $" | {x} | {y}";
                 DrawDart(x,y);
+                PlayButton.Enabled = true;
+                SaveButton.Enabled = false;
+                PlayButton.Focus();
             }
             UpdateRound();
         }
@@ -193,43 +206,56 @@ namespace DartGame
         }
         static int RecordCount(string path,ref int count)
         {
-            
-            using (StreamReader currentFile = new StreamReader(path))
+            try
             {
-                while (!currentFile.EndOfStream)
+                using (StreamReader currentFile = new StreamReader(path))
                 {
-                    currentFile.ReadLine();
-                    count++;
+                    while (!currentFile.EndOfStream)
+                    {
+                        currentFile.ReadLine();
+                        count++;
+                    }
                 }
             }
-            
+            catch (Exception) 
+            {
+                ReadFromFile(path);
+                count = 0;
+            }
             return count;
         }
 
         private string[,] ReadFileIntoArray(string path)
         {
-            int count = 0;
-            RecordCount(path, ref count);
-            string[,] DartData = new string[count,7];
-            string[] temp;
-            int RoundNumber = 0;
-
-            using (StreamReader currentFile = new StreamReader(path))
+             int count = 0;
+             RecordCount(path, ref count);
+             string[,] DartData = new string[count, 7];
+             string[] temp;
+             int RoundNumber = 0;
+            try
             {
-                
+                using (StreamReader currentFile = new StreamReader(path))
+                {
+
                     while (!currentFile.EndOfStream)
                     {
                         temp = currentFile.ReadLine().Split('|');
-                        DartData[RoundNumber,0] = temp[0].Replace(":|:","");
-                        DartData[RoundNumber,1] = temp[1].Replace(":|:","");
-                        DartData[RoundNumber,2] = temp[2].Replace(":|:","");
-                        DartData[RoundNumber,3] = temp[3].Replace(":|:","");
-                        DartData[RoundNumber,4] = temp[4].Replace(":|:","");
-                        DartData[RoundNumber,5] = temp[5].Replace(":|:","");
-                        DartData[RoundNumber,6] = temp[6].Replace(":|:","");
+                        DartData[RoundNumber, 0] = temp[0].Replace(":|:", "");
+                        DartData[RoundNumber, 1] = temp[1].Replace(":|:", "");
+                        DartData[RoundNumber, 2] = temp[2].Replace(":|:", "");
+                        DartData[RoundNumber, 3] = temp[3].Replace(":|:", "");
+                        DartData[RoundNumber, 4] = temp[4].Replace(":|:", "");
+                        DartData[RoundNumber, 5] = temp[5].Replace(":|:", "");
+                        DartData[RoundNumber, 6] = temp[6].Replace(":|:", "");
                         RoundNumber++;
                     }
+
+                }
                 
+            }
+            catch (Exception) 
+            {
+                ReadFromFile(path);
             }
             DartArray = DartData;
             return DartData;
@@ -270,6 +296,7 @@ namespace DartGame
         //Event Handlers----------------------------------------------------------------------------------------------------------------------------
         private void DartGame_Load(object sender, EventArgs e)
         {
+            ReviewRadioButton.Checked = true;
             load = 1;
         }
 
@@ -286,14 +313,46 @@ namespace DartGame
                 if (result == DialogResult.Yes)
                 {
                     Review();
+                    PlayButton.Enabled = false;
+                    SaveButton.Enabled = false;
+
                 }
                 else if (result == DialogResult.No)
                 {
                     PlayRadioButton.Checked = true;
+                    if (DartCount < 3)
+                    {
+                        PlayButton.Enabled = true;
+                        SaveButton.Enabled = false;
+                        PlayButton.Focus();
+                    }
+                    else 
+                    {
+                        PlayButton.Enabled = false;
+                        SaveButton.Enabled = true;
+                        SaveButton.Focus();
+                    }
                 }
+            }
+            else if (ReviewRadioButton.Checked == true) 
+            {
+                FillComboBox();
             }
             else 
             {
+                PlayRadioButton.Checked = true;
+                if (DartCount < 3)
+                {
+                    PlayButton.Enabled = true;
+                    SaveButton.Enabled = false;
+                    PlayButton.Focus();
+                }
+                else
+                {
+                    PlayButton.Enabled = false;
+                    SaveButton.Enabled = true;
+                    SaveButton.Focus();
+                }
                 ReviewGroupBox.Hide();
                 Displaylabel.Text = "Press Space to Launch Darts";
                 DrawBoard();
@@ -311,6 +370,21 @@ namespace DartGame
         private void DisplayComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBoxChange();
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            Play();
+        }
+
+        private void PlayButton_Click(object sender, EventArgs e)
+        {
+            Play();
+        }
+
+        private void PlayRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
