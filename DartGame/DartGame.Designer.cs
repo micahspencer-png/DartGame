@@ -43,10 +43,16 @@
             this.Dart1Label = new System.Windows.Forms.Label();
             this.Dart2Label = new System.Windows.Forms.Label();
             this.Dart3Label = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ReviewGroupBox = new System.Windows.Forms.GroupBox();
+            this.RoundGroupBox = new System.Windows.Forms.GroupBox();
+            this.PlayRoundTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.DartCountabel = new System.Windows.Forms.Label();
+            this.DartCountTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DisplayPictureBox)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.ReviewGroupBox.SuspendLayout();
+            this.RoundGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // DisplayPictureBox
@@ -59,7 +65,7 @@
             // 
             // ExitButton
             // 
-            this.ExitButton.Location = new System.Drawing.Point(668, 426);
+            this.ExitButton.Location = new System.Drawing.Point(669, 482);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(143, 71);
             this.ExitButton.TabIndex = 1;
@@ -113,7 +119,7 @@
             // Displaylabel
             // 
             this.Displaylabel.AutoSize = true;
-            this.Displaylabel.Location = new System.Drawing.Point(604, 97);
+            this.Displaylabel.Location = new System.Drawing.Point(577, 53);
             this.Displaylabel.Name = "Displaylabel";
             this.Displaylabel.Size = new System.Drawing.Size(119, 16);
             this.Displaylabel.TabIndex = 4;
@@ -121,33 +127,33 @@
             // 
             // RoundTextBox
             // 
-            this.RoundTextBox.Enabled = false;
             this.RoundTextBox.Location = new System.Drawing.Point(89, 13);
             this.RoundTextBox.Name = "RoundTextBox";
+            this.RoundTextBox.ReadOnly = true;
             this.RoundTextBox.Size = new System.Drawing.Size(122, 22);
             this.RoundTextBox.TabIndex = 5;
             // 
             // Dart1TextBox
             // 
-            this.Dart1TextBox.Enabled = false;
             this.Dart1TextBox.Location = new System.Drawing.Point(89, 41);
             this.Dart1TextBox.Name = "Dart1TextBox";
+            this.Dart1TextBox.ReadOnly = true;
             this.Dart1TextBox.Size = new System.Drawing.Size(122, 22);
             this.Dart1TextBox.TabIndex = 5;
             // 
             // Dart2TextBox
             // 
-            this.Dart2TextBox.Enabled = false;
             this.Dart2TextBox.Location = new System.Drawing.Point(89, 69);
             this.Dart2TextBox.Name = "Dart2TextBox";
+            this.Dart2TextBox.ReadOnly = true;
             this.Dart2TextBox.Size = new System.Drawing.Size(122, 22);
             this.Dart2TextBox.TabIndex = 5;
             // 
             // Dart3TextBox
             // 
-            this.Dart3TextBox.Enabled = false;
             this.Dart3TextBox.Location = new System.Drawing.Point(89, 97);
             this.Dart3TextBox.Name = "Dart3TextBox";
+            this.Dart3TextBox.ReadOnly = true;
             this.Dart3TextBox.Size = new System.Drawing.Size(122, 22);
             this.Dart3TextBox.TabIndex = 5;
             // 
@@ -187,28 +193,75 @@
             this.Dart3Label.TabIndex = 6;
             this.Dart3Label.Text = "Dart3";
             // 
-            // groupBox2
+            // ReviewGroupBox
             // 
-            this.groupBox2.Controls.Add(this.Dart3Label);
-            this.groupBox2.Controls.Add(this.Dart2Label);
-            this.groupBox2.Controls.Add(this.Dart1Label);
-            this.groupBox2.Controls.Add(this.RoundLabel);
-            this.groupBox2.Controls.Add(this.Dart3TextBox);
-            this.groupBox2.Controls.Add(this.Dart2TextBox);
-            this.groupBox2.Controls.Add(this.Dart1TextBox);
-            this.groupBox2.Controls.Add(this.RoundTextBox);
-            this.groupBox2.Location = new System.Drawing.Point(580, 218);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(231, 148);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
+            this.ReviewGroupBox.Controls.Add(this.Dart3Label);
+            this.ReviewGroupBox.Controls.Add(this.Dart2Label);
+            this.ReviewGroupBox.Controls.Add(this.Dart1Label);
+            this.ReviewGroupBox.Controls.Add(this.RoundLabel);
+            this.ReviewGroupBox.Controls.Add(this.Dart3TextBox);
+            this.ReviewGroupBox.Controls.Add(this.Dart2TextBox);
+            this.ReviewGroupBox.Controls.Add(this.Dart1TextBox);
+            this.ReviewGroupBox.Controls.Add(this.RoundTextBox);
+            this.ReviewGroupBox.Location = new System.Drawing.Point(580, 218);
+            this.ReviewGroupBox.Name = "ReviewGroupBox";
+            this.ReviewGroupBox.Size = new System.Drawing.Size(231, 148);
+            this.ReviewGroupBox.TabIndex = 7;
+            this.ReviewGroupBox.TabStop = false;
+            // 
+            // RoundGroupBox
+            // 
+            this.RoundGroupBox.Controls.Add(this.DartCountTextBox);
+            this.RoundGroupBox.Controls.Add(this.DartCountabel);
+            this.RoundGroupBox.Controls.Add(this.PlayRoundTextBox);
+            this.RoundGroupBox.Controls.Add(this.label1);
+            this.RoundGroupBox.Location = new System.Drawing.Point(586, 372);
+            this.RoundGroupBox.Name = "RoundGroupBox";
+            this.RoundGroupBox.Size = new System.Drawing.Size(205, 104);
+            this.RoundGroupBox.TabIndex = 8;
+            this.RoundGroupBox.TabStop = false;
+            // 
+            // PlayRoundTextBox
+            // 
+            this.PlayRoundTextBox.Location = new System.Drawing.Point(77, 21);
+            this.PlayRoundTextBox.Name = "PlayRoundTextBox";
+            this.PlayRoundTextBox.ReadOnly = true;
+            this.PlayRoundTextBox.Size = new System.Drawing.Size(122, 22);
+            this.PlayRoundTextBox.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 16);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Round";
+            // 
+            // DartCountabel
+            // 
+            this.DartCountabel.AutoSize = true;
+            this.DartCountabel.Location = new System.Drawing.Point(6, 52);
+            this.DartCountabel.Name = "DartCountabel";
+            this.DartCountabel.Size = new System.Drawing.Size(69, 16);
+            this.DartCountabel.TabIndex = 6;
+            this.DartCountabel.Text = "Dart Count";
+            // 
+            // DartCountTextBox
+            // 
+            this.DartCountTextBox.Location = new System.Drawing.Point(77, 49);
+            this.DartCountTextBox.Name = "DartCountTextBox";
+            this.DartCountTextBox.ReadOnly = true;
+            this.DartCountTextBox.Size = new System.Drawing.Size(122, 22);
+            this.DartCountTextBox.TabIndex = 5;
             // 
             // DartGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 574);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.RoundGroupBox);
+            this.Controls.Add(this.ReviewGroupBox);
             this.Controls.Add(this.Displaylabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DisplayComboBox);
@@ -223,8 +276,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.DisplayPictureBox)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.ReviewGroupBox.ResumeLayout(false);
+            this.ReviewGroupBox.PerformLayout();
+            this.RoundGroupBox.ResumeLayout(false);
+            this.RoundGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,7 +302,12 @@
         private System.Windows.Forms.Label Dart1Label;
         private System.Windows.Forms.Label Dart2Label;
         private System.Windows.Forms.Label Dart3Label;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox ReviewGroupBox;
+        private System.Windows.Forms.GroupBox RoundGroupBox;
+        private System.Windows.Forms.TextBox PlayRoundTextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox DartCountTextBox;
+        private System.Windows.Forms.Label DartCountabel;
     }
 }
 
