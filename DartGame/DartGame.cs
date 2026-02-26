@@ -55,7 +55,6 @@ namespace DartGame
         void DrawBoard() 
         {
             Graphics g = DisplayPictureBox.CreateGraphics();
-            Pen thePen = new Pen(Color.Black);
             System.Drawing.Image image = System.Drawing.Image.FromFile("..\\..\\..\\Transparent_DartBoard.jpg");
             float dx = DisplayPictureBox.Width / 500;
             float dy = DisplayPictureBox.Height / 500;
@@ -67,7 +66,6 @@ namespace DartGame
 
             g.DrawImage(image, 0, 0); 
             g.Dispose();
-            thePen.Dispose();
             
         }
         void DrawDart(int x, int y)
