@@ -179,7 +179,7 @@ namespace DartGame
             {
                 using (StreamWriter currentFile = File.CreateText(path))
                 {
-                    currentFile.WriteLine("Roundx | x1 | y1 | x2 | y2 | x3 | y3");
+                    currentFile.WriteLine("Round x | x1  | y1  | x2  | y2  | x3  | y3");
                 }
             }
         }
@@ -240,6 +240,13 @@ namespace DartGame
                     while (!currentFile.EndOfStream)
                     {
                         temp = currentFile.ReadLine().Split('|');
+                        temp[0] = temp[0].PadRight(3);
+                        temp[1] = temp[1].PadRight(3);
+                        temp[2] = temp[2].PadRight(3);
+                        temp[3] = temp[3].PadRight(3);
+                        temp[4] = temp[4].PadRight(3);
+                        temp[5] = temp[5].PadRight(3);
+                        temp[6] = temp[6].PadRight(3);
                         DartData[RoundNumber, 0] = temp[0].Replace(":|:", "");
                         DartData[RoundNumber, 1] = temp[1].Replace(":|:", "");
                         DartData[RoundNumber, 2] = temp[2].Replace(":|:", "");
@@ -272,26 +279,33 @@ namespace DartGame
         }
 
         private void ComboBoxChange() 
-        { 
-            int CBIndex = (int)DisplayComboBox.SelectedIndex + 1;
-            int x1 = int.Parse(DartArray[CBIndex, 1]);
-            int y1 = int.Parse(DartArray[CBIndex, 2]);
-            int x2 = int.Parse(DartArray[CBIndex, 3]);
-            int y2 = int.Parse(DartArray[CBIndex, 4]);
-            int x3 = int.Parse(DartArray[CBIndex, 5]);
-            int y3 = int.Parse(DartArray[CBIndex, 6]);
+        {
+            try
+            {
+                int CBIndex = (int)DisplayComboBox.SelectedIndex + 1;
+                int x1 = int.Parse(DartArray[CBIndex, 1]);
+                int y1 = int.Parse(DartArray[CBIndex, 2]);
+                int x2 = int.Parse(DartArray[CBIndex, 3]);
+                int y2 = int.Parse(DartArray[CBIndex, 4]);
+                int x3 = int.Parse(DartArray[CBIndex, 5]);
+                int y3 = int.Parse(DartArray[CBIndex, 6]);
 
-            RoundTextBox.Text = DartArray[CBIndex,0].ToString();
-            Dart1TextBox.Text = $"{DartArray[CBIndex, 1].ToString()}, {DartArray[CBIndex, 2].ToString()}";
-            Dart2TextBox.Text = $"{DartArray[CBIndex, 3].ToString()}, {DartArray[CBIndex, 4].ToString()}";
-            Dart3TextBox.Text = $"{DartArray[CBIndex, 5].ToString()}, {DartArray[CBIndex, 6].ToString()}";
-            DrawBoard();
-            DrawDart(x1,y1);
-            DrawNumber(x1,y1,"1");
-            DrawDart(x2,y2);
-            DrawNumber(x2,y2,"2");
-            DrawDart(x3,y3);
-            DrawNumber(x3,y3,"3");
+                RoundTextBox.Text = DartArray[CBIndex, 0].ToString();
+                Dart1TextBox.Text = $"{DartArray[CBIndex, 1].ToString()}, {DartArray[CBIndex, 2].ToString()}";
+                Dart2TextBox.Text = $"{DartArray[CBIndex, 3].ToString()}, {DartArray[CBIndex, 4].ToString()}";
+                Dart3TextBox.Text = $"{DartArray[CBIndex, 5].ToString()}, {DartArray[CBIndex, 6].ToString()}";
+                DrawBoard();
+                DrawDart(x1, y1);
+                DrawNumber(x1, y1, "1");
+                DrawDart(x2, y2);
+                DrawNumber(x2, y2, "2");
+                DrawDart(x3, y3);
+                DrawNumber(x3, y3, "3");
+            }
+            catch (Exception) 
+            {
+                MessageBox.Show("Check the Data Logs for Corruption");
+            }
         }
         //Event Handlers----------------------------------------------------------------------------------------------------------------------------
         private void DartGame_Load(object sender, EventArgs e)
